@@ -14,17 +14,17 @@ const AddTodo = () => {
   };
 
   return (
-    <div className="mb-4">
+    <div className="mb-6 flex items-center">
       <input
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Add a new Todo"
-        className="w-full p-2 rounded border"
+        className="w-96 p-3 rounded border"
       />
       <button
         onClick={handleAddTodo}
-        className="bg-blue-500 text-white p-2 rounded ml-2"
+        className="add-button bg-blue-500 text-white p-3 rounded ml-3 w-40"
       >
         Add
       </button>
