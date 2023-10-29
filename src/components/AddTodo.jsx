@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addTodo } from '../redux/todoSlice';
-import PropTypes from 'prop-types';
 import Swal from 'sweetalert2';
 
 const Toast = Swal.mixin({
@@ -20,26 +19,35 @@ const AddTodo = () => {
   const [text, setText] = useState('');
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos.items);
+  const [isInputEmpty, setIsInputEmpty] = useState(false);
 
   const handleAddTodo = () => {
     if (text.trim() === '') {
       Toast.fire({
         icon: 'error',
-        title: 'To-do Cannot be Empty!'
+        title: 'Todo Cannot Be Empty!'
       });
+      setIsInputEmpty(true);
       return;
     }
 
     if (todos.some((todo) => todo.text === text)) {
       Toast.fire({
         icon: 'warning',
-        title: 'To-do Already Exists!'
+        title: 'Todo Already Exists!'
       });
       return;
     }
 
     dispatch(addTodo(text));
     setText('');
+    setIsInputEmpty(false);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleAddTodo();
+    }
   };
 
   return (
@@ -47,9 +55,13 @@ const AddTodo = () => {
       <input
         type="text"
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => {
+          setText(e.target.value);
+          setIsInputEmpty(false);
+        }}
+        onKeyDown={handleKeyPress}
         placeholder="Add a new Todo"
-        className="w-96 p-3 rounded border"
+        className={`w-96 p-3 rounded border${isInputEmpty ? ' border-red-500' : ''}`}
       />
       <button
         onClick={handleAddTodo}
@@ -59,10 +71,6 @@ const AddTodo = () => {
       </button>
     </div>
   );
-};
-
-AddTodo.propTypes = {
-  addTodo: PropTypes.func.isRequired,
 };
 
 export default AddTodo;

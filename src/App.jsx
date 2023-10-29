@@ -1,32 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AddTodo from './components/AddTodo';
 import TodoList from './components/TodoList';
+import ToggleSwitch from './components/ToggleSwitch';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import './App.css';
-import PropTypes from 'prop-types';
+
 
 function App() {
+  const [backgroundOn, setBackgroundOn] = useState(false);
+
+  const toggleBackground = () => {
+    setBackgroundOn((prevBackgroundOn) => !prevBackgroundOn);
+  };
+
   return (
-    <div className="bg-black-100 min-h-screen flex flex-col items-center justify-start">
-      <h1 className="text-4xl font-bold my-8 flex items-center">
-        <img
-          src="https://imgur.com/Vp2uUK1.png"
-          alt="Your Image Alt Text"
-          className="w-12 h-12 mr-2"
-        />
-        To-do List
-      </h1>
+    <div
+      className={`bg-black-100 min-h-screen flex flex-col items-center justify-start ${
+        backgroundOn ? 'bg-on' : 'bg-off'
+      }`}
+    >
+      <Header />
       <AddTodo />
       <TodoList />
+      <ToggleSwitch isOn={backgroundOn} handleToggle={toggleBackground} />
+      <Footer />
     </div>
   );
 }
-
-App.propTypes = {
-  addTodo: PropTypes.func.isRequired,
-  toggleTodo: PropTypes.func.isRequired,
-  deleteTodo: PropTypes.func.isRequired,
-  editTodo: PropTypes.func.isRequired,
-  setFilter: PropTypes.func.isRequired,
-};
 
 export default App;
