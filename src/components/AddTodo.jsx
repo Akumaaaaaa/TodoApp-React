@@ -1,16 +1,45 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addTodo } from '../redux/todoSlice';
+import PropTypes from 'prop-types';
+import Swal from 'sweetalert2';
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-right',
+  iconColor: 'white',
+  customClass: {
+    popup: 'colored-toast'
+  },
+  showConfirmButton: false,
+  timer: 1500,
+  timerProgressBar: true
+});
 
 const AddTodo = () => {
   const [text, setText] = useState('');
   const dispatch = useDispatch();
+  const todos = useSelector((state) => state.todos.items);
 
   const handleAddTodo = () => {
-    if (text.trim() !== '') {
-      dispatch(addTodo(text));
-      setText('');
+    if (text.trim() === '') {
+      Toast.fire({
+        icon: 'error',
+        title: 'To-do Cannot be Empty!'
+      });
+      return;
     }
+
+    if (todos.some((todo) => todo.text === text)) {
+      Toast.fire({
+        icon: 'warning',
+        title: 'To-do Already Exists!'
+      });
+      return;
+    }
+
+    dispatch(addTodo(text));
+    setText('');
   };
 
   return (
@@ -30,6 +59,10 @@ const AddTodo = () => {
       </button>
     </div>
   );
+};
+
+AddTodo.propTypes = {
+  addTodo: PropTypes.func.isRequired,
 };
 
 export default AddTodo;

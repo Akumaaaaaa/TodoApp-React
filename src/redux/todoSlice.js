@@ -12,6 +12,7 @@ const todoSlice = createSlice({
         id: Date.now(),
         text: action.payload,
         completed: false,
+        createdAt: new Date().toLocaleString(),
       });
     },
     toggleTodo: (state, action) => {
