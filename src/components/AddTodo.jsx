@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTodo } from '../redux/todoSlice';
+import { addTodo, resetTodos } from '../redux/todoSlice';
 import Swal from 'sweetalert2';
 
 const Toast = Swal.mixin({
@@ -65,9 +65,15 @@ const AddTodo = () => {
       />
       <button
         onClick={handleAddTodo}
-        className="add-button bg-blue-500 text-white p-3 rounded ml-3 w-40"
+        className="addremove-button bg-blue-500 text-white p-3 rounded ml-3 w-20 hover:bg-blue-400"
       >
         Add
+      </button>
+      <button
+          onClick={() => dispatch(resetTodos())}
+          className="addremove-button bg-red-500 text-white p-3 rounded ml-3 w-20 hover:bg-red-400"
+        >
+          Clear
       </button>
     </div>
   );

@@ -30,6 +30,10 @@ const todoSlice = createSlice({
         todo.text = action.payload.text;
       }
     },
+    resetTodos: (state) => {
+      state.items = [];
+      state.filter = 'all';
+    },
     setFilter: (state, action) => {
       state.filter = action.payload;
     },
@@ -41,6 +45,7 @@ export const {
   toggleTodo,
   deleteTodo,
   editTodo,
+  resetTodos,
   setFilter,
 } = todoSlice.actions;
 export default todoSlice.reducer;
