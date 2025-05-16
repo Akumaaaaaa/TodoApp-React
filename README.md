@@ -1,6 +1,6 @@
 # React Todo List App
 
-This is a simple Todo List application built using React and Vite. It allows users to manage their tasks by adding, updating, and removing them.
+This is a simple Todo List application built using **React** and **Vite**. It allows users to manage their tasks by adding, updating, and removing them.
 
 ## Features
 - Add tasks to the list.
@@ -14,7 +14,7 @@ This is a simple Todo List application built using React and Vite. It allows use
 To use the To-do App, follow these steps:
 1. Clone the repository to your local machine:
 ```
-git clone https://github.com/your-username/todo-list-app.git
+git clone https://github.com/Akumaaaaaa/TodoApp-React.git
 ```
 2. Open the project directory
 Example 
@@ -27,5 +27,5 @@ npm install
 ```
 
 ## Screenshots
-![Light Mode](https://imgur.com/5AUtl9X.png)
-![Dark Mode](https://imgur.com/LjjeaF8.png)
+![Light Mode](https://i.imgur.com/zsgGDfh.png)
+![Dark Mode](https://i.imgur.com/Xogej5x.png)
